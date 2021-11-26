@@ -24,12 +24,16 @@ const autoScroll = keyframes`
 }
 `;
 
-const Track = styled.div`
-  display: flex;
-  width: 100%;
-  animation: ${({animSpeed}) => animSpeed || "4s"} ${autoScroll} linear;
-  animation-iteration-count: infinite;
-  transform: translate (-316px);
+
+
+const Track = styled((props) => {
+  return <div></div>;
+})`
+display: flex;
+width: 100%;
+animation: ${({ animSpeed }) => animSpeed || "4s"} ${autoScroll} linear;
+animation-iteration-count: infinite;
+transform: translate (-316px);
 `;
 
 //Card should be a div.
@@ -81,7 +85,7 @@ const makeCards = (
   cardsRef: React.RefObject<HTMLDivElement>[],
   images: string[]
 ) => {
-  console.log("Making Cards!")
+  console.log("Making Cards!");
   return Array(num)
     .fill(null)
     .map((__, index) => {
@@ -93,7 +97,7 @@ export default styled((props) => {
   const divRef = createRef<HTMLDivElement>();
   const trackRef = useRef<HTMLDivElement>(null);
 
-  console.log(props.images)
+  console.log(props.images);
   const images = [...props.images];
   const cardsRef: React.RefObject<HTMLDivElement>[] = Array(12)
     .fill(null)
@@ -102,7 +106,7 @@ export default styled((props) => {
 
   useEffect(() => {
     //Runs on ComponentDidMount
-    console.log("mounting")
+    console.log("mounting");
     cardsRef.forEach((cardRef, index) => {
       setImage(cardRef, images[index]);
     });
@@ -125,7 +129,9 @@ export default styled((props) => {
 
   return (
     <Container maxWidth="false" ref={divRef} {...props}>
-      <Track ref={trackRef} animSpeed={props.animSpeed}>{cards}</Track>
+      <Track ref={trackRef} animSpeed={props.animSpeed}>
+        {cards}
+      </Track>
     </Container>
   );
 })`
