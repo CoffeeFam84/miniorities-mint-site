@@ -7,7 +7,8 @@ const SocialButton = styled((props) => {
 })`
     width: 10rem;
     height: 4rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    border-radius: 20px;
 `;
 
 export default styled((props) => {
@@ -18,10 +19,10 @@ export default styled((props) => {
         Holders will be entered in airdrop giveaways and more!
       </Typography>
       <div className="socials">
-        <SocialButton href="https://twitter.com/QualifiedDevs">
+        <SocialButton color="twitterButton" href="https://twitter.com/QualifiedDevs">
           Twitter
         </SocialButton>
-        <SocialButton href="https://discord.gg/k2bTq4eD">Discord</SocialButton>
+        <SocialButton color="discordButton" href="https://discord.gg/k2bTq4eD">Discord</SocialButton>
       </div>
     </Container>
   );
@@ -38,14 +39,19 @@ export default styled((props) => {
   }
 
   p {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 5rem;
+    width: 80%;
   }
 
   .socials {
+      width: 100%;
       display: flex;
-      justify-content: space-between;
+      padding: 0 30%;
+      a {
+        margin: auto;
+      }
   }
 
   margin-bottom: 15rem;

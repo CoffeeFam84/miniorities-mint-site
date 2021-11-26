@@ -27,11 +27,12 @@ const Cloud = styled((props) => {
 `;
 
 const MintButton = styled((props) => {
-  return <Button variant="contained" size="large" {...props} />;
+  return <Button variant="contained" size="large" color="mintButton" {...props} />;
 })`
     width: min(16rem, 40%);
     height: min(6rem, 40%);
-    font-size: clamp(1em, 20%, 1.2em);
+    font-size: clamp(1.4em, 20%, 1.2em);
+    border-radius: 10px;
 `;
 
 export default styled((props) => {
@@ -40,7 +41,7 @@ export default styled((props) => {
       <Cloud src="cloud-top-background.svg" position="top" order="background" />
       <Cloud src="cloud-top-foreground.svg" position="top" order="foreground" />
       <Logo className="logo" />
-      <MintButton>Connect Wallet</MintButton>
+      <MintButton>Coming Soon</MintButton>
       <Cloud
         src="cloud-bottom-background.svg"
         position="bottom"

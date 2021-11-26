@@ -23,7 +23,7 @@ const Section = styled((props) => {
     </div>
   );
 })`
-  height: 50rem;
+  height: 40rem;
 
   display: grid;
   grid-template-columns: 1fr auto 1fr;
