@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from "react";
 import { createRef, useRef, forwardRef, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
@@ -24,30 +25,25 @@ const autoScroll = keyframes`
 }
 `;
 
-
-
-const Track = styled((props) => {
-  return <div></div>;
-})`
-display: flex;
-width: 100%;
-animation: ${({ animSpeed }) => animSpeed || "4s"} ${autoScroll} linear;
-animation-iteration-count: infinite;
-transform: translate (-316px);
-`;
-
-//Card should be a div.
-//
-
-const Card = styled(
+const Track = styled(
   forwardRef((props, ref) => {
-    return (
-      <div ref={ref} {...props}>
-        <img src={props.src} />
-      </div>
-    );
+    return <div {...props} ref={ref}/>;
   })
 )`
+  display: flex;
+  width: 100%;
+  animation: ${({ animSpeed }) => animSpeed || "4s"} ${autoScroll} linear;
+  animation-iteration-count: infinite;
+  transform: translate (-316px);
+`;
+
+const Card = styled((props) => {
+  return (
+    <div {...props}>
+      <img src={props.src} />
+    </div>
+  );
+})`
   width: 300px;
   height: 300px;
   border-radius: 10px;
@@ -76,20 +72,16 @@ const useRefDimensions = (ref: React.RefObject<HTMLDivElement>) => {
   return dimensions;
 };
 
-const setImage = (cardRef: React.RefObject<HTMLDivElement>, src: string) => {
-  cardRef.current.children[0].src = src;
-};
+// const setImage = (cardRef: React.RefObject<HTMLDivElement>, src: string) => {
+//   cardRef.current.children[0].src = src;
+// };
 
-const makeCards = (
-  num: number,
-  cardsRef: React.RefObject<HTMLDivElement>[],
-  images: string[]
-) => {
+const makeCards = (num: number, images: string[]) => {
   console.log("Making Cards!");
   return Array(num)
     .fill(null)
     .map((__, index) => {
-      return <Card src={images[index]} ref={cardsRef[index]} />;
+      return <Card src={images[index]} key={index} />;
     });
 };
 
@@ -97,43 +89,28 @@ export default styled((props) => {
   const divRef = createRef<HTMLDivElement>();
   const trackRef = useRef<HTMLDivElement>(null);
 
-  console.log(props.images);
-  const images = [...props.images];
-  const cardsRef: React.RefObject<HTMLDivElement>[] = Array(12)
-    .fill(null)
-    .map(() => useRef<HTMLDivElement>(null));
-  const cards = makeCards(12, cardsRef, images);
+  const [cards, setCards] = useState(makeCards(12, props.images));
 
   useEffect(() => {
-    //Runs on ComponentDidMount
     console.log("mounting");
-    cardsRef.forEach((cardRef, index) => {
-      setImage(cardRef, images[index]);
-    });
+    console.log(trackRef.current)
     trackRef.current?.addEventListener(
       "animationiteration",
       onAnimationIteration
     );
   }, []);
 
-  // To do order and crap it just makes more sense to use an array anyways.
   const onAnimationIteration = () => {
-    const image = images.pop();
-    images.unshift(image);
-    cardsRef.forEach(
-      (cardRef, index) => (cardRef.current.children[0].src = images[index])
-    );
-    //What is the point of being able to natively set the image?
-    //I need to be moving the images instead, then
+
+    cards.unshift(cards.pop())
+    setCards([...cards]);
   };
 
   return (
-    <Container maxWidth="false" ref={divRef} {...props}>
+    <Container maxWidth="false" disableGutters ref={divRef} {...props}>
       <Track ref={trackRef} animSpeed={props.animSpeed}>
         {cards}
       </Track>
     </Container>
   );
-})`
-  padding: 0 !important;
-`;
+})``;
