@@ -2,9 +2,7 @@ import * as React from "react";
 
 import Link from "next/link";
 
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
+import { Container, Box, ButtonBase } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 
@@ -21,37 +19,47 @@ const MenuButton = styled((props) => {
   border-radius: 8px;
   border: 4px solid transparent;
   padding: 4px;
-  width: 8em;
+  width: min(25vw, 8rem);
   height: fit-content;
   font-weight: bold;
+  color: #353535;
 `;
 
 const Menu = styled((props) => {
   return <Box component="nav" {...props} />;
 })`
   display: flex;
-  & * {
+  * {
     margin: 0 1rem;
   }
-    margin-right: 5%;
+  *:first-child {
+    margin-left: 0;
+  }
+  *:last-child {
+    margin-right: 0;
+  }
 `;
 
 export default styled((props) => {
   return (
-    <header {...props}>
+    <Container component="header" maxWidth={false} {...props}>
       <Menu>
         <MenuButton href="#art">Art</MenuButton>
         <MenuButton href="#about">About</MenuButton>
         <MenuButton href="#roadmap">Roadmap</MenuButton>
       </Menu>
-    </header>
+    </Container>
   );
 })`
-position: absolute;
-width: 100%;
-  height: 10vh;
+  position: absolute;
+
+  height: 5rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   z-index: 3;
+
+  @media screen and (max-width: 800px) {
+    justify-content: center;
+  }
 `;

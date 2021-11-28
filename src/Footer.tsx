@@ -16,12 +16,13 @@ export default styled((props) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
 
   background: linear-gradient(white, white) padding-box,
     linear-gradient(41deg, rgba(0, 212, 255, 1), rgba(218, 113, 255, 1))
       border-box;
   border-top: 4px solid transparent;
-  padding-top: 2rem;
 
   .powered-by {
     display: flex;
@@ -36,5 +37,23 @@ export default styled((props) => {
   img {
     width: 2rem;
   }
-  margin-bottom: 2rem;
+
+  @media screen and (max-width: 600px) {
+    h6 {
+      font-size: 1rem;
+    }
+    img {
+      width: 1.4rem;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    h6 {
+      font-size: .8rem;
+    }
+    img {
+      width: 1rem;
+    }
+  }
+
 `;

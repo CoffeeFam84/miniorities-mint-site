@@ -7,18 +7,21 @@ const Section = styled((props) => {
   return (
     <div className="roadmap-section" {...props}>
       <div className="stage-container">
-        <img src={props.src} />
+        <img src={props.stage} className="stage" />
       </div>
 
       <div className="scroll-bar-container">
-        <div className="scroll-icon">
-          <div className="scroll-icon-color" />
+        <div className="scroll-icon-container">
+          <div className="scroll-icon">
+            <div className="scroll-icon-color" />
+          </div>
         </div>
       </div>
 
       <div className="content">
+        <img src={props.stage} className="stage" />
         <Typography>{props.desc}</Typography>
-        <img src={props.img} />
+        <img src={props.img} className="mockup" />
       </div>
     </div>
   );
@@ -34,7 +37,7 @@ const Section = styled((props) => {
     align-items: center;
 
     padding: 2rem 0;
-    * {
+    .stage {
       position: sticky;
       top: 50%;
     }
@@ -42,31 +45,32 @@ const Section = styled((props) => {
 
   .scroll-bar-container {
     position: relative;
-    display: flex;
-    justify-content: center;
-    margin: 0 2rem;
     padding: 2rem 0;
+    height: 100%;
+    width: fit-content;
 
-    .scroll-icon {
+    .scroll-icon-container {
       position: sticky;
       top: 50%;
-
-      width: 2rem;
-      height: 2rem;
-      margin: 22.5px 0;
-      background: #ffffff;
-      border-radius: 50%;
-      box-shadow: 0 1px 3px 1px hsla(0, 0%, 0%, 25%);
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .scroll-icon-color {
-        width: 68%;
-        height: 68%;
-        background: ${({ iconColor }) => iconColor};
+      height: 77px;
+      padding-top: 15px;
+      .scroll-icon {
+        width: 2rem;
+        height: 2rem;
+        background: #ffffff;
         border-radius: 50%;
+        box-shadow: 0 1px 3px 1px hsla(0, 0%, 0%, 25%);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .scroll-icon-color {
+          width: 68%;
+          height: 68%;
+          background: ${({ iconcolor }) => iconcolor};
+          border-radius: 50%;
+        }
       }
     }
   }
@@ -74,10 +78,11 @@ const Section = styled((props) => {
   .content {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
-    width: 320px;
-    img {
+    width: 400px;
+    padding-left: 5rem;
+
+    .mockup {
       width: 100%;
       border: 10px solid white;
       border-radius: 8px;
@@ -88,6 +93,25 @@ const Section = styled((props) => {
       font-weight: 500;
       width: 100%;
       margin-bottom: 1.5rem;
+    }
+    .stage {
+      display: none;
+      width: 6rem;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+
+    grid-template-columns: auto 1fr;
+    place-items: center;
+
+    .stage-container {
+      display: none;
+    }
+    .content {
+      .stage {
+        display: initial;
+      }
     }
   }
 `;
@@ -137,41 +161,41 @@ export default styled((props) => {
       <div className="sections">
         <div className="scroll-bar-background" />
         <Section
-          src="stage-stickers/1.png"
+          stage="stage-stickers/1.png"
           desc="We sell out all 888 of random generated minorities costing 0.5 Sol"
           img="mockups/1.png"
-          iconColor="#F04F4F"
+          iconcolor="#F04F4F"
         ></Section>
         <Section
-          src="stage-stickers/2.png"
+          stage="stage-stickers/2.png"
           desc="Engage build a community of friends and build a family of new people!"
           img="mockups/2.png"
-          iconColor="#30A6FF"
+          iconcolor="#30A6FF"
         ></Section>
         <Section
-          src="stage-stickers/3.png"
+          stage="stage-stickers/3.png"
           desc="Get our NFTs onto the secondary market and Raise the Floor!"
           img="mockups/3.png"
-          iconColor="#93C848"
+          iconcolor="#93C848"
         ></Section>
         <Section
-          src="stage-stickers/4.png"
+          stage="stage-stickers/4.png"
           desc="Donate to percentage of earnings Great Ormond Street Kids Hospital"
           img="mockups/4.png"
-          iconColor="#FFCF1C"
+          iconcolor="#FFCF1C"
         ></Section>
         <Section
-          src="stage-stickers/5.png"
+          stage="stage-stickers/5.png"
           desc="Everyone that holds a Little Minorities will be air dropped a chocolate bar"
           img="mockups/5.png"
-          iconColor="#F04F4F"
+          iconcolor="#F04F4F"
         ></Section>
         <Section
-          src="stage-stickers/6.png"
+          stage="stage-stickers/6.png"
           desc="You will be able to mint unwrap the the chocolate bar and 100 out of 888 will contain 
 a golden ticket..... The Reset is a Secret "
           img="mockups/6.png"
-          iconColor="#30A6FF"
+          iconcolor="#30A6FF"
         ></Section>
       </div>
     </Container>
@@ -179,17 +203,12 @@ a golden ticket..... The Reset is a Secret "
 })`
   position: relative;
 
-  counter-reset: section;
-  :first-child {
-    background: blue;
-    color: red;
-  }
-
   #roadmap {
     text-align: center;
     display: grid;
-    margin: 0 auto 15rem;
+    margin: 0 auto 8rem;
     width: fit-content;
+
     h2 {
       margin: 0 1rem;
       font-weight: bold;
@@ -223,7 +242,14 @@ a golden ticket..... The Reset is a Secret "
         rgba(193, 124, 255, 0) 100%
       );
     }
+    @media screen and (max-width: 800px) {
+      .scroll-bar-background {
+        left: calc(0% + 1rem);
+      }
+      .content {
+        padding-left: 0;
+        width: clamp(150px, 80%, 320px);
+      }
+    }
   }
-
-  margin-bottom: 15rem;
 `;

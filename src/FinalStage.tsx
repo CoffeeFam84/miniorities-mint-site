@@ -33,26 +33,40 @@ export default styled((props) => {
   text-align: center;
 
   .heading {
-    color: #ff6464;
-    font-weight: bold;
+    width: min(400px, 100%);
     margin-bottom: 4rem;
   }
 
   p {
+    width: min(90%, 500px);
+    color: #2c2c2c;
     font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 5rem;
-    width: 80%;
   }
 
   .socials {
-      width: 100%;
+      width: min(400px, 90%);
       display: flex;
-      padding: 0 30%;
+      justify-content: space-between;
       a {
-        margin: auto;
+
       }
   }
 
-  margin-bottom: 15rem;
+  @media screen and (max-width: 450px) {
+    .heading {
+      margin-bottom: 2.2rem;
+    }
+    p {
+      font-size: 1.4rem;
+      margin-bottom: 3rem;
+    }
+    .socials {
+      a {
+        font-size: 1rem;
+        margin: 0 1rem;
+      }
+    }
+  }
 `;

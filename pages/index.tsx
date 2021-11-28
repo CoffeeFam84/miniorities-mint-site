@@ -1,12 +1,7 @@
 import fs from "fs";
 
 import * as React from "react";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import ProTip from "../src/ProTip";
-import Link from "../src/Link";
-import Copyright from "../src/Copyright";
+import { Container } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 
@@ -22,17 +17,17 @@ export default styled((props) => {
   return (
     <Container maxWidth="false" {...props}>
       <Header />
-      <Hook />
+      <Hook sx={{ mb: "max(15vw, 10rem)" }} />
       <div id="art">
         <div className="slider-container">
-          <ScrollingSlider images={props.mockups[0]} animSpeed="2.9s"/>
-          <ScrollingSlider images={props.mockups[1]} animSpeed="2.7s"/>
-          <ScrollingSlider images={props.mockups[2]} animSpeed="3.2s"/>
+          <ScrollingSlider images={props.mockups[0]} animspeed="2.9s" />
+          <ScrollingSlider images={props.mockups[1]} animspeed="2.7s" />
+          <ScrollingSlider images={props.mockups[2]} animspeed="3.2s" />
         </div>
       </div>
-      <Intro />
-      <Roadmap />
-      <FinalStage />
+      <Intro sx={{ mb: "max(20vw, 16rem)" }} />
+      <Roadmap sx={{ mb: 20 }} />
+      <FinalStage sx={{ mb: 20 }} />
       <Footer />
     </Container>
   );

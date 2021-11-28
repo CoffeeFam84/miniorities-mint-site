@@ -5,14 +5,6 @@ import styled, { keyframes } from "styled-components";
 
 import { Container } from "@mui/material";
 
-// How am I gonna do this?
-// I think I probably need to play more with MUI first.
-
-/*
-  Ok let's think...
-  I need to select for only the most recently used shit.
-*/
-
 //TODO: Translate should be determined by card width or (1/numCards)%
 const autoScroll = keyframes`
  {
@@ -32,7 +24,7 @@ const Track = styled(
 )`
   display: flex;
   width: 100%;
-  animation: ${({ animSpeed }) => animSpeed || "4s"} ${autoScroll} linear;
+  animation: ${({ animspeed }) => animspeed || "4s"} ${autoScroll} linear;
   animation-iteration-count: infinite;
   transform: translate (-316px);
 `;
@@ -77,7 +69,6 @@ const useRefDimensions = (ref: React.RefObject<HTMLDivElement>) => {
 // };
 
 const makeCards = (num: number, images: string[]) => {
-  console.log("Making Cards!");
   return Array(num)
     .fill(null)
     .map((__, index) => {
@@ -89,11 +80,9 @@ export default styled((props) => {
   const divRef = createRef<HTMLDivElement>();
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const [cards, setCards] = useState(makeCards(12, props.images));
+  const [cards, setCards] = useState(() => makeCards(12, props.images));  //This is the bug, so how do I fix?
 
   useEffect(() => {
-    console.log("mounting");
-    console.log(trackRef.current)
     trackRef.current?.addEventListener(
       "animationiteration",
       onAnimationIteration
@@ -108,7 +97,7 @@ export default styled((props) => {
 
   return (
     <Container maxWidth="false" disableGutters ref={divRef} {...props}>
-      <Track ref={trackRef} animSpeed={props.animSpeed}>
+      <Track ref={trackRef} animspeed={props.animspeed}>
         {cards}
       </Track>
     </Container>
