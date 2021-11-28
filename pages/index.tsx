@@ -42,7 +42,7 @@ export default styled((props) => {
 
     .slider-container {
       width: fit-content;
-      margin: 15% 0;
+      margin: 0 0 15rem;
       transform: translate(-10%) rotate(-8deg);
     }
     margin-bottom: 25rem;

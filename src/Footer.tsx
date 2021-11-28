@@ -49,11 +49,10 @@ export default styled((props) => {
 
   @media screen and (max-width: 500px) {
     h6 {
-      font-size: .8rem;
+      font-size: 0.8rem;
     }
     img {
       width: 1rem;
     }
   }
-
 `;
