@@ -23,7 +23,7 @@ export default function MyApp(props: AppProps) {
   return (
     <React.Fragment>
       <Head>
-        <title>Teddy Bears Club</title>
+        <title>The Little Minorities</title>
         <link href="/favicon.ico" rel="icon" />
         <meta
           content="minimum-scale=1, initial-scale=1, width=device-width"
