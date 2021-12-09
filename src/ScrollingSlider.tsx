@@ -19,7 +19,7 @@ const autoScroll = keyframes`
 
 const Track = styled(
   forwardRef((props, ref) => {
-    return <div {...props} ref={ref}/>;
+    return <div {...props} ref={ref} />;
   })
 )`
   display: flex;
@@ -80,20 +80,18 @@ export default styled((props) => {
   const divRef = createRef<HTMLDivElement>();
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const [cards, setCards] = useState(() => makeCards(12, props.images));  //This is the bug, so how do I fix?
+  const [cards, setCards] = useState(() => makeCards(12, props.images)); //This is the bug, so how do I fix?
 
-  useEffect(() => {
-    trackRef.current?.addEventListener(
-      "animationiteration",
-      onAnimationIteration
-    );
-  }, []);
-
+  //  Could this be a problem? All it does is pop cards and re-render
   const onAnimationIteration = () => {
-
-    cards.unshift(cards.pop())
+    cards.unshift(cards.pop());
     setCards([...cards]);
   };
+
+  useEffect(() => {
+    console.log(trackRef)
+    trackRef.current!.onanimationiteration = onAnimationIteration;
+  }, []);
 
   return (
     <Container maxWidth="false" disableGutters ref={divRef} {...props}>
