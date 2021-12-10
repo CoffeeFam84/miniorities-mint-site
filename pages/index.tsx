@@ -7,11 +7,12 @@ import { styled } from "@mui/material/styles";
 
 import Header from "../src/Header";
 import Hook from "../src/Hook";
-import ScrollingSlider from "../src/ScrollingSlider";
+import StaticSlider from "../src/StaticSlider";
 import Intro from "../src/Intro";
 import Roadmap from "../src/Roadmap";
 import FinalStage from "../src/FinalStage";
 import Footer from "../src/Footer";
+import { translateAddress } from "@project-serum/anchor";
 
 export default styled((props) => {
   return (
@@ -20,9 +21,9 @@ export default styled((props) => {
       <Hook sx={{ mb: "max(15vw, 10rem)" }} />
       <div id="art">
         <div className="slider-container">
-          <ScrollingSlider images={props.mockups[0]} animspeed="2.9s" />
-          <ScrollingSlider images={props.mockups[1]} animspeed="2.7s" />
-          <ScrollingSlider images={props.mockups[2]} animspeed="3.2s" />
+          <StaticSlider images={props.mockups[0]} sx={{transform: "translate(150px, 0)"}}/>
+          <StaticSlider images={props.mockups[1]} sx={{}}/>
+          <StaticSlider images={props.mockups[2]} sx={{}}/>
         </div>
       </div>
       <Intro sx={{ mb: "max(20vw, 16rem)" }} />
