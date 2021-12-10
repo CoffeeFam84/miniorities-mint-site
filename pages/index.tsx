@@ -23,7 +23,7 @@ export default styled((props) => {
         <div className="slider-container">
           <StaticSlider images={props.mockups[0]} sx={{transform: "translate(150px, 0)"}}/>
           <StaticSlider images={props.mockups[1]} sx={{}}/>
-          <StaticSlider images={props.mockups[2]} sx={{}}/>
+          <StaticSlider images={props.mockups[2]} sx={{transform: "translate(150px, 0)"}}/>
         </div>
       </div>
       <Intro sx={{ mb: "max(20vw, 16rem)" }} />
