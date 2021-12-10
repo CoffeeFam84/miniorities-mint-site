@@ -1,5 +1,6 @@
 const withTM = require("next-transpile-modules")([
   "@mui/material",
+  "@mui/icons-material",
   "@mui/lab",
   "@mui/system",
   "@blocto/sdk",

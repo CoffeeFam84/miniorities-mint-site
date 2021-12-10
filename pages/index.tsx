@@ -11,6 +11,7 @@ import StaticSlider from "../src/StaticSlider";
 import Intro from "../src/Intro";
 import Roadmap from "../src/Roadmap";
 import FinalStage from "../src/FinalStage";
+import FAQ from "../src/FAQ"
 import Footer from "../src/Footer";
 import { translateAddress } from "@project-serum/anchor";
 
@@ -21,14 +22,16 @@ export default styled((props) => {
       <Hook sx={{ mb: "max(15vw, 10rem)" }} />
       <div id="art">
         <div className="slider-container">
-          <StaticSlider images={props.mockups[0]} sx={{transform: "translate(150px, 0)"}}/>
+          <StaticSlider images={props.mockups[0]} sx={{transform: "translate(100px, 0)"}}/>
           <StaticSlider images={props.mockups[1]} sx={{}}/>
-          <StaticSlider images={props.mockups[2]} sx={{transform: "translate(150px, 0)"}}/>
+          <StaticSlider images={props.mockups[2]} sx={{transform: "translate(-100px, 0)"}}/>
         </div>
       </div>
       <Intro sx={{ mb: "max(20vw, 16rem)" }} />
       <Roadmap sx={{ mb: 20 }} />
-      <FinalStage sx={{ mb: 20 }} />
+      <FinalStage sx={{ mb: 35 }} />
+      <FAQ sx={{ mb: 15 }}/>
+      
       <Footer />
     </Container>
   );
