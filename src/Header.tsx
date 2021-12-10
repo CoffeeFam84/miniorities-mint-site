@@ -19,7 +19,7 @@ const MenuButton = styled((props) => {
   border-radius: 8px;
   border: 4px solid transparent;
   padding: 4px;
-  width: min(25vw, 8rem);
+  width: min(20vw, 7rem);
   height: fit-content;
   font-weight: bold;
   color: #353535;
@@ -29,13 +29,13 @@ const Menu = styled((props) => {
   return <Box component="nav" {...props} />;
 })`
   display: flex;
-  * {
+  a {
     margin: 0 1rem;
   }
-  *:first-child {
+  a:first-child {
     margin-left: 0;
   }
-  *:last-child {
+  a:last-child {
     margin-right: 0;
   }
 `;
@@ -47,6 +47,7 @@ export default styled((props) => {
         <MenuButton href="#art">Art</MenuButton>
         <MenuButton href="#about">About</MenuButton>
         <MenuButton href="#roadmap">Roadmap</MenuButton>
+        <MenuButton href="#FAQ">FAQ</MenuButton>
       </Menu>
     </Container>
   );
@@ -61,5 +62,9 @@ export default styled((props) => {
 
   @media screen and (max-width: 800px) {
     justify-content: center;
+    a {
+      margin: .2rem;;
+      font-size: .9rem;
+    }
   }
 `;
