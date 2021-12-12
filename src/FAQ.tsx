@@ -61,19 +61,19 @@ const FAQ = styled((props) => {
             expanded={expanded === "panel2"}
             onChange={handleChange("panel2")}
             q="Who is the team running this NFT?"
-            a="This is a gift, I the creator [Dienne] have made the art and have put all my ideas into the road map and more."
+            a="I the creator (Dienne) has made the art and have put all my ideas into the road map and more."
           />
           <Item
             expanded={expanded === "panel3"}
             onChange={handleChange("panel3")}
             q="Where will I be able to find my NFT?"
-            a="Once you've minted your NFT will be found in your collection on the phantom wallet."
+            a="Once you've minted your NFT it will be found in your collection on the phantom wallet."
           />
           <Item
             expanded={expanded === "panel4"}
             onChange={handleChange("panel4")}
             q="Why did you choose to donate to Great Ormond Street Kids Hospital?"
-            a="The reason I chose to donate to this charity is because of reasons in my personal life that relate to past experiences"
+            a="The reason I chose to donate to this charity is because of reasons in my personal life that relate to past experiences."
           />
           <Item
             expanded={expanded === "panel5"}

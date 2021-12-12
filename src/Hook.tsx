@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
 import { styled, keyframes } from "@mui/material/styles";
-import MultiButton from "../src/MultiButton"
+import MultiButton from "../src/MultiButton";
 
 import Logo from "../src/Logo";
 
@@ -34,21 +34,23 @@ const Cloud = styled((props) => {
         return 2;
     }
   }};
-  width: max(1440px, 100%)
+  width: max(1440px, 100%);
 `;
 
 const MintButton = styled((props) => {
-  return <Button variant="contained" size="large" color="mintButton" {...props} />;
+  return (
+    <Button variant="contained" size="large" color="mintButton" {...props} />
+  );
 })`
-    width: min(16rem, 40%);
-    height: 6rem;
-    font-size: 1.4rem;
-    border-radius: 10px;
+  width: min(16rem, 40%);
+  height: 6rem;
+  font-size: 1.4rem;
+  border-radius: 10px;
 
-    @media screen and (max-width: 800px) {
-      font-size: 1.1rem;
-      height: 4rem;
-    }
+  @media screen and (max-width: 800px) {
+    font-size: 1.1rem;
+    height: 4rem;
+  }
 `;
 
 export default styled((props) => {
@@ -57,7 +59,9 @@ export default styled((props) => {
       <Cloud src="cloud-top-background.svg" position="top" order="background" />
       <Cloud src="cloud-top-foreground.svg" position="top" order="foreground" />
       <Logo className="logo" />
-      <MultiButton>Coming Soon</MultiButton>
+      <Button variant="contained" color="mintButton">
+        Coming Soon
+      </Button>
       <Cloud
         src="cloud-bottom-background.svg"
         position="bottom"
@@ -93,7 +97,20 @@ export default styled((props) => {
     animation-iteration-count: infinite;
   }
 
- .logo, button {
+  .logo,
+  button {
     z-index: 3;
+  }
+
+  button {
+    width: min(16rem, 40%);
+    height: 6rem;
+    font-size: 1.4rem;
+    border-radius: 10px;
+
+    @media screen and (max-width: 800px) {
+      font-size: 1.1rem;
+      height: 4rem;
+    }
   }
 `;

@@ -162,25 +162,25 @@ export default styled((props) => {
         <div className="scroll-bar-background" />
         <Section
           stage="stage-stickers/1.png"
-          desc="We sell out all 888 of random generated minorities costing 0.5 Sol"
+          desc="We sell out all 888 of the randomly generated minorities costing 0.5 Sol"
           img="mockups/1.png"
           iconcolor="#F04F4F"
         ></Section>
         <Section
           stage="stage-stickers/2.png"
-          desc="Engage build a community of friends and build a family of new people!"
+          desc="Build a community of friends and build a family of new people!"
           img="mockups/2.png"
           iconcolor="#30A6FF"
         ></Section>
         <Section
           stage="stage-stickers/3.png"
-          desc="Get our NFTs onto the secondary market and Raise the Floor!"
+          desc="Get our NFTs onto the secondary market and raise the Floor!"
           img="mockups/3.png"
           iconcolor="#93C848"
         ></Section>
         <Section
           stage="stage-stickers/4.png"
-          desc="Donate to percentage of earnings Great Ormond Street Kids Hospital"
+          desc="Donate a percentage of earnings to the Great Ormond Street Kids Hospital"
           img="mockups/4.png"
           iconcolor="#FFCF1C"
         ></Section>
@@ -192,7 +192,7 @@ export default styled((props) => {
         ></Section>
         <Section
           stage="stage-stickers/6.png"
-          desc="You will be able to mint unwrap the the chocolate bar and 100 out of 888 will contain 
+          desc="You will be able to unwrap the chocolate bar and 100 out of 888 will contain 
 a golden ticket..... The Reset is a Secret "
           img="mockups/6.png"
           iconcolor="#30A6FF"
