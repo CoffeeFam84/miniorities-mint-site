@@ -59,6 +59,7 @@ export default styled((props) => {
       <Cloud src="cloud-top-background.svg" position="top" order="background" />
       <Cloud src="cloud-top-foreground.svg" position="top" order="foreground" />
       <Logo className="logo" />
+      {/* @ts-ignore */}
       <Button variant="contained" color="mintButton">
         Coming Soon
       </Button>
