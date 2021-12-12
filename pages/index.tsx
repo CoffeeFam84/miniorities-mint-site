@@ -13,7 +13,6 @@ import Roadmap from "../src/Roadmap";
 import FinalStage from "../src/FinalStage";
 import FAQ from "../src/FAQ"
 import Footer from "../src/Footer";
-import { translateAddress } from "@project-serum/anchor";
 
 export default styled((props) => {
   return (
