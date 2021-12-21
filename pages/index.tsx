@@ -1,13 +1,13 @@
 import fs from "fs";
 
 import * as React from "react";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 
 import Header from "../src/Header";
 import Hook from "../src/Hook";
-import StaticSlider from "../src/StaticSlider";
+import ScrollingSlider from "../src/ScrollingSlider";
 import Intro from "../src/Intro";
 import Roadmap from "../src/Roadmap";
 import FinalStage from "../src/FinalStage";
@@ -19,13 +19,14 @@ export default styled((props) => {
     <Container maxWidth="false" {...props}>
       <Header />
       <Hook sx={{ mb: "max(15vw, 10rem)" }} />
-      <div id="art">
-        <div className="slider-container">
-          <StaticSlider images={props.mockups[0]} sx={{transform: "translate(100px, 0)", mt: 10}}/>
-          <StaticSlider images={props.mockups[1]} sx={{}}/>
-          <StaticSlider images={props.mockups[2]} sx={{transform: "translate(-100px, 0)"}}/>
-        </div>
-      </div>
+      <Box id="art">
+        {/* <Box className="slider-container">
+          <ScrollingSlider images={props.mockups[0]} sx={{transform: "translate(100px, 0)", mt: 10}}/>
+          <ScrollingSlider images={props.mockups[1]} sx={{}}/>
+          <ScrollingSlider images={props.mockups[2]} sx={{transform: "translate(-100px, 0)"}}/>
+        </Box> */}
+        <ScrollingSlider images={props.mockups[0]} pxPerSec={25}/>
+      </Box>
       <Intro sx={{ mb: "max(20vw, 16rem)" }} />
       <Roadmap sx={{ mb: 20 }} />
       <FinalStage sx={{ mb: 35 }} />

@@ -209,7 +209,7 @@ export default styled((props) => {
           stage="stage-stickers/6.png"
           img="mockups/6.png"
           iconcolor="#30A6FF"
-        >-	Only 222 out of 2222 Little Minorities will be airdropped a Golden Ticket.. Hold on to your tickets, don’t sell them. You will want to keep these..</Section>
+        >Only 222 out of 2222 Little Minorities will be airdropped a Golden Ticket.. Hold on to your tickets, don’t sell them. You will want to keep these..</Section>
       </div>
     </Container>
   );

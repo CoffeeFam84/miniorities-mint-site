@@ -1,6 +1,20 @@
 import { Container, Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+import Image from "next/image";
+import portrait from "../public/portrait.png";
+
+const Portrait = styled((props) => {
+  return (
+    <Box {...props}>
+      <Image src={portrait} layout="fill" objectFit="contain" />
+    </Box>
+  );
+})`
+  position: relative;
+  width: clamp(20rem, 80%, 30rem);
+`;
+
 // Will probably go with display grid I think is how this shit works.
 
 export default styled((props) => {
@@ -31,27 +45,22 @@ export default styled((props) => {
           support each other in whatever it is they do.
         </Typography>
       </Box>
-      <img src="portrait.png"></img>
+        <Portrait className="portrait" />
     </Container>
   );
 })`
   display: flex;
   justify-content: center;
 
-  text-align: center;
-
   & > * {
-    margin: 2rem;
-  }
-
-  img {
-    width: clamp(20rem, 80%, 30rem);
+    margin: 0 2rem;
   }
 
   .text {
     width: min(100%, 40rem);
 
     h2 {
+      text-align: center;
       background: linear-gradient(
         41deg,
         rgba(0, 212, 255, 1),
@@ -72,12 +81,13 @@ export default styled((props) => {
   @media screen and (max-width: 1000px) {
     flex-direction: column;
     align-items: center;
-
+    text-align: center;
+    .portrait {
+      height: min(100vw, 400px);
+      width: min(20rem, 100%);
+    }
     .text {
-      h2 {
-      }
-      p {
-      }
+      margin-bottom: 2rem;
     }
   }
 
