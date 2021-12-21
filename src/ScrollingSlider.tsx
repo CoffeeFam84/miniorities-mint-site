@@ -37,6 +37,7 @@ const Card = styled((props) => {
   box-shadow: 0px 0px 2.5px 1.25px hsla(0, 0%, 0%, 20%);
 
   .image-wrapper {
+
     position: relative;
     width: 100%;
     height: 100%;
@@ -44,6 +45,7 @@ const Card = styled((props) => {
     &,
     span,
     img {
+        
       border-radius: inherit;
     }
   }
@@ -86,23 +88,36 @@ const animateCards = (
   nodes: HTMLElement[],
   pxPerSec: number
 ) => {
+  const cardsData = new Map();
+  nodes.forEach((node) => cardsData.set(node, getCardPos(node)));
 
-  const finish = nodes.reduce((totalWidth, node) => totalWidth + getCardSpace(node), 0)
+  const finish = nodes.reduce(
+    (totalWidth, node) => totalWidth + getCardSpace(node),
+    -316
+  );
+
   const pxPerMs = pxPerSec / 1000;
-  let prevTimeStamp = 2000;
+
+  let last: number;
 
   const frame = (time: number) => {
-    const delta = time - prevTimeStamp;
+    last = last || time;
+    const delta = time - last;
+
     nodes.forEach((node) => {
-      let pos = getCardPos(node);
+      let pos = cardsData.get(node);
       pos += delta * pxPerMs;
-      if (pos >= finish) {
-        pos -= finish;
-        pos -= getCardSpace(node);
+
+      if (pos > finish) {
+        pos -= finish + getCardSpace(node);
       }
+
+      setCardPos(node, pos);
+      cardsData.set(node, pos);
       setCardPos(node, pos);
     });
-    prevTimeStamp = time;
+
+    last = time;
     window.requestAnimationFrame(frame);
   };
 
@@ -156,7 +171,7 @@ const ScrollingSlider = styled((props) => {
 })`
   position: relative;
   overflow: hidden;
-  background: #535353;
+  width: 100%;
   height: 316px;
 `;
 
