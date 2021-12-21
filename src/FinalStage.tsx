@@ -5,24 +5,30 @@ import { Container, Typography, Button } from "@mui/material";
 const SocialButton = styled((props) => {
   return <Button variant="contained" {...props}></Button>;
 })`
-    width: 10rem;
-    height: 4rem;
-    font-size: 1.4rem;
-    border-radius: 20px;
+  width: 10rem;
+  height: 4rem;
+  font-size: 1.4rem;
+  border-radius: 20px;
 `;
 
 export default styled((props) => {
   return (
     <Container {...props}>
-      <img className="heading" src="final-stage.png"/>
+      <img className="heading" src="final-stage.png" />
       <Typography>
-        Holders will be entered in airdrop giveaways and more!
+        The reveal of what the use of the Golden Ticket will be for and airdrops
+        for our community.
       </Typography>
       <div className="socials">
-        <SocialButton color="twitterButton" href="https://twitter.com/QualifiedDevs">
+        <SocialButton
+          color="twitterButton"
+          href="https://twitter.com/QualifiedDevs"
+        >
           Twitter
         </SocialButton>
-        <SocialButton color="discordButton" href="https://discord.gg/k2bTq4eD">Discord</SocialButton>
+        <SocialButton color="discordButton" href="https://discord.gg/EMJu8Cs2ss">
+          Discord
+        </SocialButton>
       </div>
     </Container>
   );
@@ -46,12 +52,11 @@ export default styled((props) => {
   }
 
   .socials {
-      width: min(400px, 90%);
-      display: flex;
-      justify-content: space-between;
-      a {
-
-      }
+    width: min(400px, 90%);
+    display: flex;
+    justify-content: space-between;
+    a {
+    }
   }
 
   @media screen and (max-width: 450px) {

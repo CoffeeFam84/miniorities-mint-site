@@ -3,6 +3,8 @@ import { Container, Typography } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 
+import Link from "./Link";
+
 const Section = styled((props) => {
   return (
     <div className="roadmap-section" {...props}>
@@ -20,7 +22,7 @@ const Section = styled((props) => {
 
       <div className="content">
         <img src={props.stage} className="stage" />
-        <Typography>{props.desc}</Typography>
+        <Typography>{props.children}</Typography>
         <img src={props.img} className="mockup" />
       </div>
     </div>
@@ -101,7 +103,6 @@ const Section = styled((props) => {
   }
 
   @media screen and (max-width: 800px) {
-
     grid-template-columns: auto 1fr;
     place-items: center;
 
@@ -162,41 +163,53 @@ export default styled((props) => {
         <div className="scroll-bar-background" />
         <Section
           stage="stage-stickers/1.png"
-          desc="We sell out all 888 of the randomly generated minorities costing 0.5 Sol"
           img="mockups/1.png"
           iconcolor="#F04F4F"
-        ></Section>
+        >
+          Whitelist is open, 500 spots available.
+          <br />
+          <Link href="https://discord.gg/6MWEfyA57G">
+            Join the Discord to learn more.
+          </Link>
+        </Section>
         <Section
           stage="stage-stickers/2.png"
-          desc="Build a community of friends and build a family of new people!"
           img="mockups/2.png"
           iconcolor="#30A6FF"
-        ></Section>
+        >
+          Pre-sale is open, all whitelisted members are able to mint.
+        </Section>
         <Section
           stage="stage-stickers/3.png"
-          desc="Get our NFTs onto the secondary market and raise the Floor!"
           img="mockups/3.png"
           iconcolor="#93C848"
-        ></Section>
+        >
+          Public sale opens shortly after pre-sale.
+        </Section>
         <Section
           stage="stage-stickers/4.png"
-          desc="Donate a percentage of earnings to the Great Ormond Street Kids Hospital"
           img="mockups/4.png"
           iconcolor="#FFCF1C"
-        ></Section>
+        >
+          We sold out!
+        </Section>
         <Section
           stage="stage-stickers/5.png"
-          desc="Everyone that holds a Little Minorities will be air dropped a chocolate bar"
           img="mockups/5.png"
           iconcolor="#F04F4F"
-        ></Section>
+        >
+          Exclusive Discord chatroom for all holders of a Little Minority opens.
+          <br />
+          Donate $5,000 to the{" "}
+          <Link href="https://www.gosh.org/">
+            Great Ormond Street Kids Hospital.
+          </Link>
+        </Section>
         <Section
           stage="stage-stickers/6.png"
-          desc="You will be able to unwrap the chocolate bar and 100 out of 888 will contain 
-a golden ticket..... The Reset is a Secret "
           img="mockups/6.png"
           iconcolor="#30A6FF"
-        ></Section>
+        >-	Only 222 out of 2222 Little Minorities will be airdropped a Golden Ticket.. Hold on to your tickets, don’t sell them. You will want to keep these..</Section>
       </div>
     </Container>
   );
