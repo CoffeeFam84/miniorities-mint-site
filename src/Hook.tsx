@@ -60,7 +60,7 @@ export default styled((props) => {
       <Cloud src="cloud-top-foreground.svg" position="top" order="foreground" />
       <Logo className="logo" />
       {/* @ts-ignore */}
-      <Button variant="contained" color="mintButton">
+      <Button className="whitelist-button" variant="contained" color="mintButton" href="https://discord.gg/6MWEfyA57G">
         Whitelist Open
       </Button>
       <Cloud
@@ -99,11 +99,11 @@ export default styled((props) => {
   }
 
   .logo,
-  button {
+  .whitelist-button {
     z-index: 3;
   }
 
-  button {
+  .whitelist-button {
     width: min(16rem, 40%);
     height: 6rem;
     font-size: 1.4rem;
