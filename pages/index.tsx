@@ -25,7 +25,7 @@ export default styled((props) => {
           <ScrollingSlider images={props.mockups[1]} sx={{}}/>
           <ScrollingSlider images={props.mockups[2]} sx={{transform: "translate(-100px, 0)"}}/>
         </Box> */}
-        <ScrollingSlider images={props.mockups[0]} pxPerSec={25}/>
+        <ScrollingSlider images={props.mockups[0]} pxPerSec={5}/>
       </Box>
       <Intro sx={{ mb: "max(20vw, 16rem)" }} />
       <Roadmap sx={{ mb: 20 }} />

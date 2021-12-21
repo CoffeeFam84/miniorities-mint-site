@@ -1,41 +1,35 @@
-// @ts-nocheck
 import * as React from "react";
-import { createRef, useRef, forwardRef, useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import {
+  createRef,
+  useRef,
+  forwardRef,
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useCallback,
+} from "react";
+import styled from "styled-components";
 
-import { Container } from "@mui/material";
-
-//TODO: Translate should be determined by card width or (1/numCards)%
-const autoScroll = keyframes`
- {
-   0% {
-     transform: translate(-316px);
-   }
-    100% {
-      transform: translate(0px);
-    }
-}
-`;
-
-const Track = styled(
-  forwardRef((props, ref) => {
-    return <div {...props} ref={ref} />;
-  })
-)`
-  display: flex;
-  width: 100%;
-  animation: ${({ animspeed }) => animspeed || "4s"} ${autoScroll} linear;
-  animation-iteration-count: infinite;
-  transform: translate (-316px);
-`;
+import { Box } from "@mui/material";
 
 const Card = styled((props) => {
+  const passedProps = { ...props };
+  passedProps.inputref = null;
   return (
-    <div {...props}>
+    // @ts-ignore (ref)
+    <div
+      ref={(node) => {
+        props.inputref(node, props.key);
+      }}
+      {...passedProps}
+    >
+      {/* @ts-ignore (props.src) */}
       <img src={props.src} />
     </div>
   );
 })`
+  position: absolute;
+  left: 0;
   width: 300px;
   height: 300px;
   border-radius: 10px;
@@ -51,53 +45,106 @@ const Card = styled((props) => {
   }
 `;
 
-const useRefDimensions = (ref: React.RefObject<HTMLDivElement>) => {
-  const [dimensions, setDimensions] = useState({ width: 1, height: 2 });
-  useEffect(() => {
-    if (ref.current) {
-      const boundingRect = ref.current.getBoundingClientRect();
-      const { width, height } = boundingRect;
-      setDimensions({ width, height });
-    }
-  }, [ref]);
-
-  return dimensions;
-};
-
-// const setImage = (cardRef: React.RefObject<HTMLDivElement>, src: string) => {
-//   cardRef.current.children[0].src = src;
-// };
-
-const makeCards = (num: number, images: string[]) => {
-  return Array(num)
+//@ts-ignore
+const makeCards = (num: number, images: string[], inputRef) => {
+  const cards = Array(num)
     .fill(null)
     .map((__, index) => {
-      return <Card src={`/${images[index]}`} key={index} />;
+      const card = (
+        // @ts-ignore (src)
+        <Card src={images[index]} inputref={inputRef} key={index} />
+      );
+      return card;
     });
+  return cards;
+};
+
+const getSpaceX = (ele: HTMLDivElement) => {
+  const style = getComputedStyle(ele);
+  const marginLeft = parseInt(style.marginLeft);
+  const marginRight = parseInt(style.marginRight);
+  return ele.clientWidth + marginLeft + marginRight;
+};
+
+const animateCards = (cardRefs: any[], pxPerMs: number) => {
+  let lastTick = performance.now();
+
+  const cardsData = new Map();
+  let startPos = 0;
+
+  //set original position for each card
+  cardRefs.forEach((cardRef) => {
+    const card = cardRef.current;
+    const cardSpace = getSpaceX(card!);
+    startPos += cardSpace;
+
+    cardsData.set(cardRef, { pos: startPos - cardSpace });
+  });
+
+  function tick(nowish: number) {
+    const delta = nowish - lastTick;
+    lastTick = nowish;
+
+    cardRefs.forEach((cardRef) => {
+      const card = cardRef.current;
+      const data = cardsData.get(cardRef);
+      const lastPos = data.pos;
+      const cardSpace = getSpaceX(card!);
+
+      // console.log(lastPos, delta, pxPerMs)
+
+      // update position
+      //console.log(pxPerMs)
+      const cardPos = (lastPos + delta * pxPerMs) % (500 + cardSpace);
+      data.pos = cardPos;
+
+      // render new position
+
+      card!.style.left = `${cardPos}px`;
+    });
+    window.requestAnimationFrame(tick);
+  }
+  window.requestAnimationFrame(tick);
 };
 
 export default styled((props) => {
-  const divRef = createRef<HTMLDivElement>();
-  const trackRef = useRef<HTMLDivElement>(null);
+  // const divRef = createRef<HTMLDivElement>();
+  // const trackRef = useRef<HTMLDivElement>(null);
 
-  const [cards, setCards] = useState(() => makeCards(12, props.images)); //This is the bug, so how do I fix?
+  console.log("RENDERING");
 
-  //  Could this be a problem? All it does is pop cards and re-render
-  const onAnimationIteration = () => {
-    cards.unshift(cards.pop());
-    setCards([...cards]);
-  };
+  const [isLoaded, setIsLoaded] = useState(false);
+  const cardsLoaded = useRef(0);
 
-  useEffect(() => {
-    console.log(trackRef)
-    trackRef.current!.onanimationiteration = onAnimationIteration;
+  const onRefChange = useCallback((node, key) => {
+    if (!node || cardsLoaded == props.numcards) return; // This will be a problem if ref changes more than once before all are loaded
+    cardRefs[cardsLoaded.current].current = node; //! Potential issue here?
+    console.log(node);
+    cardsLoaded.current++;
+    if (cardsLoaded.current < props.numcards) return;
+    console.log("set is loaded!");
+    setIsLoaded(true);
   }, []);
 
-  return (
-    <Container maxWidth="false" disableGutters ref={divRef} {...props}>
-      <Track ref={trackRef} animspeed={props.animspeed}>
-        {cards}
-      </Track>
-    </Container>
-  );
-})``;
+  const [cardRefs, setCardRefs] = useState(() => {
+    return Array(props.numcards).fill({});
+  });
+
+  const [cards, setCards] = useState(() => {
+    return makeCards(props.numcards, props.images, onRefChange);
+  });
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    console.log("time to animate");
+    animateCards(cardRefs, props.pxPerSec * 1000);
+  }, [isLoaded]);
+
+  return <Box {...props}>{cards}</Box>;
+})`
+  position: relative;
+  background: red;
+  height: 300px;
+  width: 80vw;
+  overflow: hidden;
+`;
