@@ -11,20 +11,19 @@ import discord from "../public/social-icons/discord.svg";
 const SocialItem = styled((props) => {
   return (
     <Link href={props.href}>
-      <Box component="li" {...props}>
+      <Box component="li" {...props} className={`${props.className} social-icon`}>
         <Image src={props.src} layout="responsive" objectFit="contain" />
       </Box>
     </Link>
   );
 })`
-  width: 35px;
+  width: 45px;
 
   img {
-    transform: box-shadow 0.5s;
-    fill: blue;
+    transition: filter 0.2s;
 
     :hover {
-      box-shadow: 0px 0px 4px 4px ${({ theme }) => theme.palette.primary.main};
+      filter: brightness(110%);
     }
   }
 `;
@@ -44,7 +43,7 @@ const SocialsMenu = styled((props) => {
     display: flex;
     align-items: center;
     a {
-      margin: 0 0.8em;
+      margin: 0 0.3em;
       &:first-child {
         margin-left: 0;
       }
@@ -98,7 +97,7 @@ export default styled((props) => {
           src={twitter}
           fill="blue"
         />
-        <SocialItem href="" src={discord} fill="blue" />
+        <SocialItem href="https://t.co/ESPEsKGtx6" src={discord} fill="blue" />
       </SocialsMenu>
       <Menu>
         <MenuButton href="#art">Art</MenuButton>
@@ -113,12 +112,18 @@ export default styled((props) => {
 
   height: 5rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   z-index: 3;
 
   @media screen and (max-width: 800px) {
-    justify-content: center;
+    padding-top: 2rem;
+    flex-direction: column-reverse;
+
+    .social-icon {
+      width: 35px;
+    }
+
     a {
       margin: 0.2rem;
       font-size: 0.9rem;

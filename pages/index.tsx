@@ -43,10 +43,13 @@ export default styled((props) => {
     margin-bottom: 25rem;
 
     .slider-container {
-      width: 150%;
-      transform: translate(-25%) rotate(-8deg);
+      display: flex;
       overflow: hidden;
-      margin: 8rem 0;
+      flex-direction: column;
+      align-items: center;
+      width: 200vw;
+      transform: translate(-25%) rotate(-8deg);
+      margin: 10vw;
     }
   }
 `;
