@@ -19,17 +19,6 @@ export default styled((props) => {
         The reveal of what the use of the Golden Ticket will be for and airdrops
         for our community.
       </Typography>
-      <div className="socials">
-        <SocialButton
-          color="twitterButton"
-          href="https://twitter.com/QualifiedDevs"
-        >
-          Twitter
-        </SocialButton>
-        <SocialButton color="discordButton" href="https://discord.gg/EMJu8Cs2ss">
-          Discord
-        </SocialButton>
-      </div>
     </Container>
   );
 })`

@@ -1,10 +1,59 @@
 import * as React from "react";
-
-import Link from "next/link";
-
 import { Container, Box, ButtonBase } from "@mui/material";
-
 import { styled } from "@mui/material/styles";
+
+import Link from "./Link";
+import Image from "next/image";
+
+import twitter from "../public/social-icons/twitter.svg";
+import discord from "../public/social-icons/discord.svg";
+
+const SocialItem = styled((props) => {
+  return (
+    <Link href={props.href}>
+      <Box component="li" {...props}>
+        <Image src={props.src} layout="responsive" objectFit="contain" />
+      </Box>
+    </Link>
+  );
+})`
+  width: 35px;
+
+  img {
+    transform: box-shadow 0.5s;
+    fill: blue;
+
+    :hover {
+      box-shadow: 0px 0px 4px 4px ${({ theme }) => theme.palette.primary.main};
+    }
+  }
+`;
+
+const SocialsMenu = styled((props) => {
+  return (
+    <Box component="nav" {...props}>
+      <ul>{props.children}</ul>
+    </Box>
+  );
+})`
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    a {
+      margin: 0 0.8em;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+`;
 
 const MenuButton = styled((props) => {
   return (
@@ -43,6 +92,14 @@ const Menu = styled((props) => {
 export default styled((props) => {
   return (
     <Container component="header" maxWidth={false} {...props}>
+      <SocialsMenu>
+        <SocialItem
+          href="https://twitter.com/MinoritiesNFT"
+          src={twitter}
+          fill="blue"
+        />
+        <SocialItem href="" src={discord} fill="blue" />
+      </SocialsMenu>
       <Menu>
         <MenuButton href="#art">Art</MenuButton>
         <MenuButton href="#about">About</MenuButton>
@@ -63,8 +120,8 @@ export default styled((props) => {
   @media screen and (max-width: 800px) {
     justify-content: center;
     a {
-      margin: .2rem;;
-      font-size: .9rem;
+      margin: 0.2rem;
+      font-size: 0.9rem;
     }
   }
 `;
