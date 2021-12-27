@@ -57,7 +57,7 @@ const SocialsMenu = styled((props) => {
 const MenuButton = styled((props) => {
   return (
     <Link href={props.href}>
-      <ButtonBase variant="outlined" color="secondary" {...props} />
+      <ButtonBase variant="outlined" color="secondary" component="span" {...props} />
     </Link>
   );
 })`
