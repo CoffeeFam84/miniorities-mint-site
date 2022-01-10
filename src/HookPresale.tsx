@@ -185,6 +185,8 @@ export default styled((props: PresaleProps) => {
 
       if (props.candyMachineId) {
         try {
+          console.log('candyMachineId', props.candyMachineId);
+          console.log('connection', props.connection);
           const cndy = await getCandyMachineState(
             anchorWallet,
             props.candyMachineId,
