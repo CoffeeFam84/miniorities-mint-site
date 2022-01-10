@@ -28,6 +28,8 @@ export default styled((props) => {
         candyMachineId={candyMachineId}
         connection={connection}
         rpcHost={rpcHost}
+        startDate={10}
+        txTimeout={30000}
       />
     </Container>
   );

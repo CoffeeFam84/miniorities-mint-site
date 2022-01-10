@@ -67,7 +67,7 @@ const WalletConnect = styled((props) => {
   margin-top: 1rem;
 `;
 
-export interface HookProps {
+export interface PresaleProps {
   candyMachineId?: anchor.web3.PublicKey;
   connection: anchor.web3.Connection;
   startDate: number;
@@ -75,7 +75,7 @@ export interface HookProps {
   rpcHost: string;
 }
 
-export default styled((props: HookProps) => {
+export default styled((props: PresaleProps) => {
   
   const [yourSOLBalance, setYourSOLBalance] = useState<number | null>(null);
   const rpcUrl = props.rpcHost;
@@ -204,7 +204,7 @@ export default styled((props: HookProps) => {
   const candyMachineGoLive = toDate(candyMachine?.state.goLiveDate)?.getTime();
 
   return (
-    <Container maxWidth="false" disableGutters {...props}>
+    <Container maxWidth={false} disableGutters {...props}>
       <Cloud src="cloud-top-background.svg" position="top" order="background" />
       <Cloud src="cloud-top-foreground.svg" position="top" order="foreground" />
       <WalletConnect />

@@ -17,7 +17,7 @@ export const MintButton = ({
 
   return (
     <Button
-      className="whitelist-button" variant="contained" color="mintButton"
+      className="whitelist-button" variant="contained"
       disabled={
         candyMachine?.state.isSoldOut || isMinting
         // || !candyMachine?.state.isActive

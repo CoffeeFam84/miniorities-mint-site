@@ -3,7 +3,6 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
 import { styled, keyframes } from "@mui/material/styles";
-import MultiButton from "../src/MultiButton";
 
 import Logo from "../src/Logo";
 
