@@ -7,6 +7,16 @@ import theme from "../src/theme";
 
 import dynamic from "next/dynamic";
 
+import { WalletBalanceProvider } from "../hooks/useWalletBalance";
+require("@solana/wallet-adapter-react-ui/styles.css");
+
+const WalletConnectionProvider = dynamic(
+  () => import("../components/WalletConnection/WalletConnectionProvider"),
+  {
+    ssr: false,
+  }
+);
+
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
   return (
@@ -19,13 +29,19 @@ export default function MyApp(props: AppProps) {
           name="viewport"
         />
       </Head>
-      <ThemeProvider theme={theme}>
+      
+      <WalletConnectionProvider>
+        <WalletBalanceProvider>
+          <ThemeProvider theme={theme}>
 
             <CssBaseline />
             <GlobalStyles styles={{html: {scrollBehavior: "smooth"}}}/>
+            
             <Component {...pageProps} />
 
-      </ThemeProvider>
+          </ThemeProvider>
+        </WalletBalanceProvider>
+      </WalletConnectionProvider>
     </React.Fragment>
   );
 }

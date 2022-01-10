@@ -1,8 +1,5 @@
 import * as anchor from "@project-serum/anchor";
-import { programs } from "@metaplex/js";
-const {
-  metadata: { Metadata },
-} = programs;
+import { Metadata } from "@metaplex/js";
 
 import { MintLayout, TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
 import { sendTransactions, sleep } from ".";
@@ -32,6 +29,42 @@ interface CandyMachineState {
   itemsRedeemed: number;
   itemsRemaining: number;
   goLiveDate: Date;
+}
+
+export async function existsOwnerSPLToken(
+  connection: anchor.web3.Connection,
+  ownerAddress: anchor.web3.PublicKey
+) {
+  // console.log("As TOKEN ");
+  const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
+    ownerAddress,
+    {
+      programId: TOKEN_PROGRAM_ID,
+    }
+  );
+
+  console.log(tokenAccounts);
+  // let multipleAccounts = [];
+  // while (tokenAccounts.length > 0) {
+  //   const lookups = mintPubkeys.splice(0, 100);
+  //   const lookupAccts = await conn.getMultipleAccountsInfo(lookups);
+  //   multipleAccounts.push(...lookupAccts);
+  // }
+
+  for (let index = 0; index < tokenAccounts.value.length; index++) {
+    const tokenAccount = tokenAccounts.value[index];
+    const tokenAmount = tokenAccount.account.data.parsed.info.tokenAmount;
+
+    const mint = tokenAccount.account.data.parsed.info.mint;
+    if (
+      mint === process.env.NEXT_PUBLIC_AIRDROP_TOKEN &&
+      tokenAmount.uiAmount > 0
+    ) {
+      console.log("Found", mint === process.env.NEXT_PUBLIC_AIRDROP_TOKEN);
+      return true;
+    }
+  }
+  return false;
 }
 
 export const awaitTransactionSignatureConfirmation = async (

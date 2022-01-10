@@ -6,12 +6,10 @@ import { existsOwnerSPLToken, getNFTsForOwner } from "../utils/candyMachine";
 const rpcHost = process.env.NEXT_PUBLIC_SOLANA_RPC_HOST!;
 const connection = new anchor.web3.Connection(rpcHost);
 
-const useWalletNfts = (props: any) => {
+const useSplToken = () => {
   const wallet = useWallet();
   const [isLoading, setIsLoading] = useState(false);
   const [isSPLExists, setSPLExists] = useState(false);
-
-  const [nfts, setNfts] = useState<Array<any>>([]);
 
   useEffect(() => {
     (async () => {
@@ -30,18 +28,18 @@ const useWalletNfts = (props: any) => {
         connection,
         wallet.publicKey
       );
-      console.log("isSPLExists " + isSPLExists);
       setSPLExists(isExistSPLToken);
 
-      const nftsForOwner = await getNFTsForOwner(connection, wallet.publicKey);
-
-      setNfts(nftsForOwner as any);
-      // console.log(nftsForOwner);
       setIsLoading(false);
+      console.log(
+        "isSPLExists " + isExistSPLToken,
+        " ",
+        wallet.publicKey.toString()
+      );
     })();
   }, [wallet]);
 
-  return [isLoading, nfts, isSPLExists];
+  return [isLoading, isSPLExists];
 };
 
-export default useWalletNfts;
+export default useSplToken;

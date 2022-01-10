@@ -1,36 +1,34 @@
 import fs from "fs";
 
 import * as React from "react";
+import * as anchor from "@project-serum/anchor";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { Box, Container } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
 
 import Header from "../src/Header";
-import Hook from "../src/Hook_presale";
-import ScrollingSlider from "../src/ScrollingSlider";
-import Intro from "../src/Intro";
-import Roadmap from "../src/Roadmap";
-import FinalStage from "../src/FinalStage";
-import FAQ from "../src/FAQ";
-import Footer from "../src/Footer";
+import HookPresale from "../src/HookPresale";
+
+
+const candyMachineId = process.env.NEXT_PUBLIC_CANDY_MACHINE_ID
+  ? new anchor.web3.PublicKey(process.env.NEXT_PUBLIC_CANDY_MACHINE_ID)
+  : undefined;
+
+const network = process.env.NEXT_PUBLIC_SOLANA_NETWORK as WalletAdapterNetwork;
+
+const rpcHost = process.env.NEXT_PUBLIC_SOLANA_RPC_HOST!;
+const connection = new anchor.web3.Connection(rpcHost);
 
 export default styled((props) => {
   return (
     <Container maxWidth="false" {...props}>
       {/* <Header /> */}
-      <Hook />
-      {/* <Box id="art">
-        <Box className="slider-container">
-          <ScrollingSlider images={props.mockups[0]} pxPerSec={100} />
-          <ScrollingSlider images={props.mockups[1]} pxPerSec={120} />
-          <ScrollingSlider images={props.mockups[2]} pxPerSec={80} />
-        </Box>
-      </Box>
-      <Intro sx={{ mb: "max(20vw, 16rem)" }} />
-      <Roadmap sx={{ mb: 20 }} />
-      <FinalStage sx={{ mb: 35 }} />
-      <FAQ sx={{ mb: 15 }} />
-      <Footer /> */}
+      <HookPresale
+        candyMachineId={candyMachineId}
+        connection={connection}
+        rpcHost={rpcHost}
+      />
     </Container>
   );
 })`
