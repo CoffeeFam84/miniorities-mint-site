@@ -60,7 +60,7 @@ const FAQ = styled((props) => {
         >
           If you want to get whitelisted,{" "}
           <Link href="https://discord.gg/EMJu8Cs2ss">
-            join The Little Minorities Discord.
+            join The Little Minorities Discord
           </Link>.
         </Item>
 
